@@ -73,17 +73,18 @@ def mult_hex(num_1_, num_2_):
         digit = NUM_DEC_HEX[num_2_.pop()]
         for i in range(len(num_1_) - 1, -1, -1):
             temp = digit * NUM_DEC_HEX[num_1_[i]] + transfer
+            transfer = 0
             if temp < 16:
                 temp_result[count].appendleft(NUM_DEC_HEX[temp])
             else:
                 temp_result[count].appendleft(NUM_DEC_HEX[temp % 16])
                 transfer = temp // 16
-        if 0 < transfer:
-            temp_result[count].appendleft(NUM_DEC_HEX[transfer])
+            if transfer > 0 and i == 0:
+                temp_result[count].appendleft(NUM_DEC_HEX[transfer])
         if count > 0:
             for _ in range(count):
                 temp_result[count].append('0')
-        transfer = 0
+
         count += 1
 
     for i in temp_result:
